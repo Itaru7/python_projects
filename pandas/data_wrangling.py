@@ -43,12 +43,11 @@ def main():
     result = [tuple(x) for x in result_df.to_records(index=True)]
 
     # Write tuple to text file --------------------------------------------------------------------------------
-    f = open('result.txt', 'w')
-    f.write('\n' + 'ZIPCODE           Mean Score     Number of Restaurants' + '\n' + '\n')
-    for t in result:
-        line = '%7s  %20s  %12s' % (str(t[0]), str(t[1]), str(t[2]))
-        f.write(line + '\n')
-    f.close()
+    with open('result.txt', 'w') as file:
+        file.write('\n' + 'ZIPCODE           Mean Score     Number of Restaurants' + '\n' + '\n')
+        for t in result:
+            line = '%7s  %20s  %12s' % (str(t[0]), str(t[1]), str(t[2]))
+            file.write(line + '\n')
     # ---------------------------------------------------------------------------------------------------------
 
 
