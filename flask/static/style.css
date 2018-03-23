@@ -31,6 +31,12 @@ canvas,
 video {
   display: inline-block; }
 
+canvas {
+    width: 200px !important;
+    height: 200px !important;
+    border: 10px solid white;
+}
+
 audio:not([controls]) {
   display: none;
   height: 0; }
