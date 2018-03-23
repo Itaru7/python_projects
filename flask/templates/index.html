@@ -4,12 +4,6 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
-       <meta http-equiv="cache-control" content="max-age=0" />
-<meta http-equiv="cache-control" content="no-store" />
-<meta http-equiv="expires" content="-1" />
-<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-<meta http-equiv="pragma" content="no-cache" />
-
 		
 		<title>Compass Starter by Ariona, Rian</title>
 
@@ -24,6 +18,7 @@
 		<script src="js/ie-support/html5.js"></script>
 		<script src="js/ie-support/respond.js"></script>
 		<![endif]-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 	</head>
 
@@ -57,12 +52,13 @@
 				</div>
 			</div> <!-- .site-header -->
 
-			<div class="hero" data-bg-image="images/banner.png">
+			<div class="hero" style="background-image: url('static/background_img/{{ background }}.jpg')">
 				<div class="container">
 					<form action="/info" name="location" class="find-location" method="POST">
 						<input type="text" name="location" placeholder="Find your location...">
 						<input type="submit" value="Find">
 					</form>
+                    <a href="{{ url_for('index') }}" class="center">Current Location</a>
 
 				</div>
 			</div>
@@ -79,7 +75,7 @@
 								<div class="degree">
 									<div class="num">{{ current.main.temp }}<sup>o</sup>C</div>
 									<div class="forecast-icon">
-										<img src={{ url_for('static', filename='icons/'+current.weather[0].main+'.svg') }} alt="" width=90>
+										<img src={{ url_for('static', filename='icons/'+background+'.svg') }} alt="" width=75>
 									</div>	
 								</div>
 								<!--<span><img src="images/icon-umberella.png" alt="">20%</span>-->
@@ -144,7 +140,7 @@
 			</div>
 			<main class="main-content">
 				<div class="fullwidth-block">
-					    <img src="{{ url_for('static', filename='temp_graph.png') }}" alt="" id="center" >
+                        <canvas id="bar-chart" width="800px" height="450px"></canvas>
 				</div>
             </main>
             <!-- .main-content -->
@@ -176,6 +172,64 @@
 		<!--<script src="js/jquery-1.11.1.min.js"></script>
 		<script src="js/plugins.js"></script>
 		<script src="js/app.js"></script>-->
-
+        <script>
+            var ctx = document.getElementById("bar-chart").getContext('2d');
+            ctx.width  = 800;
+            ctx.height = 450;
+            var myChart = new Chart(ctx, {
+                width: 800,
+                height: 450,
+                type: 'bar',
+                data: {
+                    labels: [{{ forecast.date['0'] }}, {{ forecast.date['1'] }}, {{ forecast.date['2'] }}, {{ forecast.date['3'] }}, {{ forecast.date['4'] }}],
+                    datasets: [{
+                        label: 'Temperature in {{ current.name }}, {{ current.sys.country }}',
+                        data: [{{ forecast.temp['0'] }}, {{ forecast.temp['1'] }}, {{ forecast.temp['2'] }}, {{ forecast.temp['3'] }}, {{ forecast.temp['4'] }}, {{ forecast.temp['5'] }}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                fontsize:30
+                            },
+                            scaleLabel:{
+                                display: true,
+                                labelString: 'Temperature in C˚',
+                            }
+                        }],
+                        xAxes: [{
+                            ticks:{
+                                fontsize: 30
+                            },
+                          scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                          }
+                        }],
+                    }
+                }
+            });
+            myChart.width = 800
+            myChart.height = 450
+        </script>
 	</body>
 </html>

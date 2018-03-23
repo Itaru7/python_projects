@@ -4,6 +4,15 @@
     margin-right: auto;
 }
 
+a.center{
+    display: block;
+    margin-top: -5%;
+    text-align: center;
+    color: black;
+    font-size: inherit;
+    text-decoration: underline;
+}
+
 article,
 aside,
 details,
@@ -1269,7 +1278,7 @@ form textarea {
         vertical-align: middle; }
       .forecast-container .forecast.today .degree .num {
         font-size: 90px;
-        font-size: 6.4285714286rem;
+        font-size: 4.828571rem;
         margin-right: 30px; }
       .forecast-container .forecast.today span {
         margin-right: 20px; }
