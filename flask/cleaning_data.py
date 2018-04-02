@@ -9,15 +9,6 @@ from flask import Flask, render_template, redirect, request
 from choose_images import choose_icon
 
 
-def plot_data(df, city_name):
-    plt.style.use("dark_background")
-    sns.barplot(x='date', y='temp', data=df, palette='winter_d')
-    plt.xlabel("Date")
-    plt.ylabel("Temperature in C")
-    plt.title("Temperature Graph in {city_name}".format(city_name=city_name))
-    plt.savefig('static/temp_graph.png')
-
-
 def data_from_json(current, forecast):
     forecast_j = json.loads(forecast)
     current_j = json.loads(current)
@@ -26,7 +17,6 @@ def data_from_json(current, forecast):
     info = df.groupby(df['dt_txt'].dt.day).agg({'main.temp' : 'mean', 'main.temp_min' : 'min', 'main.temp_max':'max', 'main':lambda x: list(x)}).reset_index()
     info.columns = ['date', 'temp', 'weather', 'temp_max', 'temp_min']
     info = info.round(1)
-    plot_data(info, current_j['name'])
     info = choose_icon(info)
     return info
 
@@ -51,4 +41,5 @@ def get_current_loc():
     j = json.loads(r.text)
     lat = j['latitude']
     lon = j['longitude']
+    print(lat, lon)
     return lat, lon

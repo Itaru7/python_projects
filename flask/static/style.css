@@ -32,9 +32,8 @@ video {
   display: inline-block; }
 
 canvas {
-    width: 200px !important;
-    height: 200px !important;
-    border: 10px solid white;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 audio:not([controls]) {
@@ -251,7 +250,7 @@ address {
   font-style: normal; }
 
 p {
-  margin-top: 0; }
+    margin-top: 0; }
 
 form input, form textarea, form select {
   outline: none;
@@ -1317,7 +1316,11 @@ form textarea {
         font-size: 1.1428571429em; }
 
 .fullwidth-block {
-  padding: 70px 0; }
+    padding: 70px 0;
+    height: 540px;
+    margin-right: auto;
+    margin-left: auto;
+  }
   .fullwidth-block .section-title {
     font-size: 36px;
     font-size: 2.5714285714em;
@@ -1578,6 +1581,7 @@ form textarea {
     left: 0; }
 
 .contact-details {
+    float: right;
   background: #262936;
   border-radius: 10px;
   overflow: hidden; }
@@ -1687,3 +1691,14 @@ form textarea {
       background: #009ad8;
       color: white; }
 
+.itaru-face {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    margin: 0 20px 0 10px;
+    vertical-align: middle;
+}
+.contact-info a {
+    display: block;
+}

@@ -4,8 +4,6 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
-		
-		<title>Compass Starter by Ariona, Rian</title>
 
 		<!-- Loading third party fonts -->
 		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
@@ -27,11 +25,11 @@
 		<div class="site-content">
 			<div class="site-header">
 				<div class="container">
-					<a href="index.html" class="branding">
-						<!--<img src="images/logo.png" alt="" class="logo">-->
+					<a href="{{ url_for('index') }}"  class="branding">
+						<img src= "{{ url_for('static', filename='logo.png') }}" alt="" class="logo">
 						<div class="logo-type">
-							<h1 class="site-title">Company name</h1>
-							<small class="site-description">tagline goes here</small>
+							<h1 class="site-title">Weather App</h1>
+							<small class="site-description">by Itaru Kishikawa</small>
 						</div>
 					</a>
 
@@ -39,11 +37,10 @@
 					<div class="main-navigation">
 						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
 						<ul class="menu">
-							<li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-							<li class="menu-item"><a href="news.html">News</a></li>
-							<li class="menu-item"><a href="live-cameras.html">Live cameras</a></li>
-							<li class="menu-item"><a href="photos.html">Photos</a></li>
-							<li class="menu-item"><a href="contact.html">Contact</a></li>
+							<li class="menu-item current-menu-item"><a href="{{ url_for('index') }}" >Home</a></li>
+							<li class="menu-item"><a href="https://www.linkedin.com/in/itaru-kishikawa/">Linked In</a></li>
+							<li class="menu-item"><a href="https://github.com/Itaru7/python_projects/tree/master/flask">Github</a></li>
+							<li class="menu-item"><a href="{{ url_for('contact') }}">Contact</a></li>
 						</ul> <!-- .menu -->
 					</div> <!-- .main-navigation -->
 
@@ -139,32 +136,32 @@
 				</div>
 			</div>
 			<main class="main-content">
-				<div class="fullwidth-block">
-                        <canvas id="bar-chart" width="200" height="200"></canvas>
+				<div class="fullwidth-block" style="width: 810px;">
+                        <canvas id="bar-chart"></canvas>
 				</div>
             </main>
             <!-- .main-content -->
 
 			<footer class="site-footer">
 				<div class="container">
-					<div class="row">
+					<!--<div class="row">
 						<div class="col-md-8">
 							<form action="#" class="subscribe-form">
 								<input type="text" placeholder="Enter your email to subscribe...">
 								<input type="submit" value="Subscribe">
 							</form>
-						</div>
-						<div class="col-md-3 col-md-offset-1">
+						</div>-->
+						<div class="col-md-3 col-md-offset-1" style="float: right; margin-right: 8.33333%">
 							<div class="social-links">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="https://www.linkedin.com/in/itaru-kishikawa/"><i class="fa fa-facebook"><img src="{{ url_for('static', filename='linkedin.svg') }}" style="width: 40px"></i></a>
+								<a href="https://github.com/Itaru7/python_projects/tree/master/flask"><i class="fa fa-twitter"><img src="{{ url_for('static', filename='github.svg') }}" style="width: 40px"></i></a>
 								<a href="#"><i class="fa fa-google-plus"></i></a>
 								<a href="#"><i class="fa fa-pinterest"></i></a>
 							</div>
 						</div>
-					</div>
+					<!--</div>-->
 
-					<p class="colophon">Copyright 2014 Company name. Designed by Themezy. All rights reserved</p>
+					<p class="colophon" style="margin-left: 8.33333333%;">Created by Itaru Kishikawa</p>
 				</div>
 			</footer> <!-- .site-footer -->
 		</div>
@@ -179,7 +176,7 @@
                 data: {
                     labels: [{{ forecast.date['0'] }}, {{ forecast.date['1'] }}, {{ forecast.date['2'] }}, {{ forecast.date['3'] }}, {{ forecast.date['4'] }}],
                     datasets: [{
-                        label: 'Temperature in {{ current.name }}, {{ current.sys.country }}',
+                        label: 'C˚',
                         data: [{{ forecast.temp['0'] }}, {{ forecast.temp['1'] }}, {{ forecast.temp['2'] }}, {{ forecast.temp['3'] }}, {{ forecast.temp['4'] }}, {{ forecast.temp['5'] }}],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -201,26 +198,29 @@
             }]
         },
         options: {
+            title:{
+                display: true,
+                text:'Temperature in {{ current.name }}, {{ current.sys.country }}',
+                fontSize: 15
+            },
             responsive: true,
             maintainAspectRatio: false,
             scales: {
                 yAxes: [{
                     ticks: {
                         beginAtZero:true,
-                        fontsize: 30
                     },
                     scaleLabel:{
                         display: true,
                         labelString: 'Temperature in C˚',
+                        fontSize: 17,
                     }
                 }],
                 xAxes: [{
-                    ticks:{
-                        fontsize: 30
-                    },
                   scaleLabel: {
-                    display: true,
-                    labelString: 'Date'
+                      display: true,
+                      labelString: 'Date',
+                      fontSize:17
                   }
                 }],
             }
