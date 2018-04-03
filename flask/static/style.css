@@ -1479,7 +1479,7 @@ form textarea {
       vertical-align: middle;
       width: 12px;
       height: 7px;
-      background: url(images/arrow-gray.png) no-repeat;
+      background: url(icons/arrow-gray.png) no-repeat;
       margin: 0 10px; }
     .breadcrumb a:hover {
       text-decoration: underline; }
@@ -1695,9 +1695,10 @@ form textarea {
     display: inline-block;
     width: 100px;
     height: 100px;
-    background: #fff;
     margin: 0 20px 0 10px;
     vertical-align: middle;
+    border-radius: 50%;
+    object-fit: cover;
 }
 .contact-info a {
     display: block;

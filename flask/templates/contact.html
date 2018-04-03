@@ -27,7 +27,7 @@
 			<div class="site-header">
 				<div class="container">
 					<a href="{{ url_for('index') }}"  class="branding">
-						<img src= "{{ url_for('static', filename='logo.png') }}" alt="" class="logo">
+						<img src= "{{ url_for('static', filename='icons/logo.png') }}" alt="" class="logo">
 						<div class="logo-type">
 							<h1 class="site-title">Weather App</h1>
 							<small class="site-description">by Itaru Kishikawa</small>
@@ -53,41 +53,41 @@
 			<main class="main-content">
 				<div class="container">
 					<div class="breadcrumb">
-						<a href="index.html">Home</a>
+						<a href="{{ url_for('index') }}">Home</a>
 						<span>Contact</span>
 					</div>
 				</div>
 
 				<div class="fullwidth-block">
 					<div class="container">
-						<div class="col-md-5">
+						<div class="col-md-5" style="margin-top: 60px">
                             <table class="contact-details">
                                 <tr>
-                                    <td><img class="itaru-face" src="" alt=""></td>
+                                    <td><img class="itaru-face" src="{{ url_for('static', filename='icons/my_face.JPG') }}" alt=""></td>
                                     <td class="contact-info">
                                         <address>
-										    <img src="{{ url_for('static', filename='marker.png') }}" alt="">
+										    <img src="{{ url_for('static', filename='icons/marker.png') }}" alt="">
 										    <p>San Jose, CA</p>
 									    </address>
 
-									    <a href="#"><img src="{{ url_for('static', filename='phone.png') }}" alt="">+1 714 829 7042</a>
-    									<a href="#"><img src="{{ url_for('static', filename='envelope.png') }}" alt="">itaru.kishikawa@sjsu.edu</a>
+									    <a href="#"><img src="{{ url_for('static', filename='icons/phone.png') }}" alt="">+1 714 829 7042</a>
+    									<a href="#"><img src="{{ url_for('static', filename='icons/envelope.png') }}" alt="">itaru.kishikawa@sjsu.edu</a>
                                     </td>
                                 </tr>
                             </table>
 						</div>
 						<div class="col-md-6 col-md-offset-1">
-							<h2 class="section-title">Contact us</h2>
-							<form action="#" class="contact-form">
+							<h2 class="section-title">Contact to Itaru</h2>
+							<form action="/send" class="contact-form" method="POST">
 								<div class="row">
-									<div class="col-md-6"><input type="text" placeholder="Your name..."></div>
-									<div class="col-md-6"><input type="text" placeholder="Email Addresss..."></div>
+									<div class="col-md-6"><input type="text" name="name" placeholder="Your name..."></div>
+									<div class="col-md-6"><input type="text" name="email" placeholder="Email Addresss..."></div>
 								</div>
 								<div class="row">
-									<div class="col-md-6"><input type="text" placeholder="Company name..."></div>
-									<div class="col-md-6"><input type="text" placeholder="Website..."></div>
+									<div class="col-md-6"><input type="text" name="company" placeholder="Company name..."></div>
+									<div class="col-md-6"><input type="text" name="website" placeholder="Website..."></div>
 								</div>
-								<textarea name="" placeholder="Message..."></textarea>
+								<textarea name="msg" placeholder="Message..."></textarea>
 								<div class="text-right">
 									<input type="submit" placeholder="Send message">
 								</div>
@@ -110,10 +110,8 @@
 						</div>-->
 						<div class="col-md-3 col-md-offset-1" style="float: right; margin-right: 8.33333%">
 							<div class="social-links">
-                                <a href="https://www.linkedin.com/in/itaru-kishikawa/"><i class="fa fa-facebook"><img src="{{ url_for('static', filename='linkedin.svg') }}" style="width: 40px"></i></a>
-								<a href="https://github.com/Itaru7/python_projects/tree/master/flask"><i class="fa fa-twitter"><img src="{{ url_for('static', filename='github.svg') }}" style="width: 40px"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="https://www.linkedin.com/in/itaru-kishikawa/"><i class="fa fa-facebook"><img src="{{ url_for('static', filename='icons/linkedin.svg') }}" style="width: 40px"></i></a>
+								<a href="https://github.com/Itaru7/python_projects/tree/master/flask" style="margin-left: 10px"><i class="fa fa-twitter"><img src="{{ url_for('static', filename='icons/github.svg') }}" style="width: 40px"></i></a>
 							</div>
 						</div>
 					<!--</div>-->

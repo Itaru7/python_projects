@@ -3,7 +3,7 @@
     Author: Itaru Kishikawa
     Class CS 122 Advanced Python Sec 02
 """
-
+from flask import Flask, render_template, request
 from choose_images import *
 from cleaning_data import *
 
@@ -45,6 +45,20 @@ def info():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+
+@app.route('/send', methods=['POST'])
+def send():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        company = request.form['company']
+        website = request.form['website']
+        msg = request.form['msg']
+        if not company:
+            print('nothing')
+        return render_template('send.html')
+
 
 @app.errorhandler(404)
 def page_not_found(e):

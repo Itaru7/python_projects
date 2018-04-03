@@ -2,16 +2,13 @@ import pandas as pd
 import json
 import requests
 from pandas.io.json import json_normalize
-import seaborn as sns
-import matplotlib.pyplot as plt
 import urllib
-from flask import Flask, render_template, redirect, request
+from flask import redirect
 from choose_images import choose_icon
 
 
 def data_from_json(current, forecast):
     forecast_j = json.loads(forecast)
-    current_j = json.loads(current)
     df = json_normalize(forecast_j['list'], 'weather', ['dt_txt', ['main', 'temp'],['main', 'temp_min'],['main', 'temp_max']])
     df['dt_txt'] = pd.to_datetime(df['dt_txt'], format='%Y-%m-%d %X')
     info = df.groupby(df['dt_txt'].dt.day).agg({'main.temp' : 'mean', 'main.temp_min' : 'min', 'main.temp_max':'max', 'main':lambda x: list(x)}).reset_index()
