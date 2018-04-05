@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
 
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
 		<!-- Loading third party fonts -->
 		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
 		<!--<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">-->
@@ -17,6 +18,12 @@
 		<script src="js/ie-support/respond.js"></script>
 		<![endif]-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+        <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='search_box.js') }}"></script>
 
 	</head>
 
@@ -51,10 +58,35 @@
 
 			<div class="hero" style="background-image: url('static/background_img/{{ background }}.jpg')">
 				<div class="container">
-					<form action="/info" name="location" class="find-location" method="POST">
-						<input type="text" name="location" placeholder="Find your location...">
+                    <form action="/info" class="find-location" method="POST" name="location">
+						<input type="text" placeholder="Find your location..." name="location">
 						<input type="submit" value="Find">
 					</form>
+                    <!--
+                    <form action="/info" name="location" class="find-location" method="POST" autocomplete="off">
+                        <div class="autocomplete" class="ui fluid search selection dropdown">
+                             <input id="myInput" type="text" name="location" placeholder="Find your location...">
+                        </div>
+                        <input type="submit" value="Find">
+                    </form>
+                    -->
+                    <!--
+					<form action="/info" name="location" class="find-location" method="POST">
+
+                        <div class="ui fluid search selection dropdown">
+						    <input type="text" name="location" placeholder="Find your location...">
+
+                            <div class="default text">Select City Name</div>
+                            <div class="menu">
+                                <div class="item">Irvine-CA</div>
+                                <div class="item">Irvine-NY</div>
+                                <div class="item">Cost Mesa</div>
+                            </div>
+                        </div>
+
+						<input type="submit" value="Find">
+					</form>
+					-->
                     <a href="{{ url_for('index') }}" class="center">Current Location</a>
 
 				</div>
@@ -224,6 +256,17 @@
             }
         }
     });
+        </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+            autocomplete(document.getElementById("myInput"), countries);
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+        <script type="text/javascript">
+            $('.ui.fluid.dropdown').dropdown({
+                fullTextSearch: true
+            });
         </script>
 	</body>
 </html>

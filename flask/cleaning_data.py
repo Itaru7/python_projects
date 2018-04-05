@@ -3,7 +3,7 @@ import json
 import requests
 from pandas.io.json import json_normalize
 import urllib
-from flask import redirect
+from flask import render_template
 from choose_images import choose_icon
 
 
@@ -24,8 +24,8 @@ def access_api(location):
     current = urllib.urlopen(current).read()
     forecast = urllib.urlopen(forecast).read()
     j_current = json.loads(current)
-    if j_current['cod'] == '404':
-        return redirect('/index')
+    if j_current['cod'] == u'404':
+        return 500, 500
     else:
         result = data_from_json(current, forecast)
         j_forecast = result.to_json()
@@ -38,5 +38,4 @@ def get_current_loc():
     j = json.loads(r.text)
     lat = j['latitude']
     lon = j['longitude']
-    print(lat, lon)
     return lat, lon

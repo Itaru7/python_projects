@@ -44,7 +44,7 @@ audio:not([controls]) {
   display: none; }
 
 html {
-  background: #fff;
+  background: #1e202b;
   color: #000;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%; }
@@ -1702,4 +1702,41 @@ form textarea {
 }
 .contact-info a {
     display: block;
+}
+
+.requiredInputs:focus:invalid,
+.requiredInputs:hover:invalid,
+.requiredInputs:required:invalid {
+    border-color: red !important;
+}
+
+.cityNameNotFound {
+    border: 2px solid red;
+}
+
+.ui.selection.dropdown {
+    border-radius: 22px;
+}
+.ui.selection.dropdown .menu {
+    border-radius: 0 0 22px 22px;
+}
+.ui.search.dropdown,
+.ui.dropdown .menu>.message:not(.ui),
+.ui.selection.dropdown .menu>.item {
+    background: #1e202b;
+}
+.ui.search input,
+.ui.dropdown .menu>.message:not(.ui),
+.ui.selection.dropdown .menu>.item,
+.ui.search.dropdown>.text:not(.default) {
+    color: #fff;
+}
+.ui.selection.dropdown .menu>.item {
+    border-top: 1px solid #777777;
+}
+.ui.dropdown .menu>.item:hover {
+    background: #009ad8;
+}
+.ui.search.selection.dropdown {
+    padding: 20px;
 }

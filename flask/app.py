@@ -3,13 +3,17 @@
     Author: Itaru Kishikawa
     Class CS 122 Advanced Python Sec 02
 """
-from flask import Flask, render_template, request
+
+from flask import Flask, render_template, request, redirect
 from choose_images import *
 from cleaning_data import *
+import smtplib
+from email.mime.text import MIMEText
 
 # Creates a Flask application, named app
 app = Flask(__name__)
 
+import os
 
 @app.route('/')
 def main():
@@ -38,8 +42,11 @@ def info():
     if request.method == 'POST':
         location = request.form['location']
         current, forecast = access_api(location)
-        background = choose_background(current['weather'][0]['id'])
-        return render_template('index.html', current=current, forecast=forecast, background=background)
+        if current == 500:
+            return render_template('500.html'), 500
+        else:
+            background = choose_background(current['weather'][0]['id'])
+            return render_template('index.html', current=current, forecast=forecast, background=background)
 
 
 @app.route('/contact')
@@ -52,11 +59,23 @@ def send():
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
-        company = request.form['company']
-        website = request.form['website']
-        msg = request.form['msg']
-        if not company:
-            print('nothing')
+        company = request.form['company'] if request.form['company'] else 'None'
+        website = request.form['website'] if request.form['website'] else 'None'
+        body = request.form['msg']
+        msg = MIMEText('Name: ' + name +
+                       '\nEmail: ' + email +
+                       '\nCompany: ' + company +
+                       '\nWebsite: ' + website +
+                       '\nBody:\n' + body)
+        msg['Subject'] = 'Mail from weather app'
+        msg['From'] = 'contactitaru@gmail.com'
+        msg['To'] = 'ir172178@gmail.com'
+        sender = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+        sender.ehlo()
+        sender.login('contactitaru@gmail.com', 'contactitar')
+        sender.sendmail('contactitaru@gmail.com', 'ir172178@gmail.com', msg.as_string())
+        sender.quit()
+
         return render_template('send.html')
 
 
