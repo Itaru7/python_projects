@@ -15,6 +15,7 @@ app = Flask(__name__)
 
 import os
 
+
 @app.route('/')
 def main():
     return redirect('/index')

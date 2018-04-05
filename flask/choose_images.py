@@ -98,7 +98,7 @@ def choose_the_icon(lst):
 def choose_background(condition):
     result = ''
     num = condition / 100
-    if condition is 800 or 801:
+    if condition is (800 or 801):
         result = 'Clear'
     elif num is 2:
         result = 'Thunderstorm'
