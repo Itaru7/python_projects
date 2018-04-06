@@ -4,7 +4,7 @@
     Class CS 122 Advanced Python Sec 02
 """
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, request, redirect
 from choose_images import *
 from cleaning_data import *
 import smtplib
@@ -12,8 +12,6 @@ from email.mime.text import MIMEText
 
 # Creates a Flask application, named app
 app = Flask(__name__)
-
-import os
 
 
 @app.route('/')
