@@ -1,97 +1,97 @@
 from collections import Counter
+from typing import List
 
-
-def choose_the_icon(lst):
+def choose_the_icon(lst: List) -> str:
     result = ''
-    if len(lst) is 1:
-        result = lst[0] + '.svg'
-    else:
-        if 'Thunderstorm' in lst:
-            if 'Drizzle' in lst:
-                result = 'thunder-drizzle.svg'
-            elif 'Rain' in lst:
-                result = 'thunder-rain.svg'
-            elif 'Snow' in lst:
-                result = 'thunder-snow.svg'
-            elif 'Atmosphere' in lst:
-                result = 'thunder-fog.svg'
-            elif 'Clear' in lst:
-                result = 'thunder-clear.svg'
-            elif 'Clouds' in lst:
-                result = 'thunder-clouds.svg'
-            elif 'Extreme' in lst:
-                result = 'thunder-extreme.svg'
-            else:
-                result = 'Additional.svg'
+    if len(lst) == 1:
+        return lst[0] + '.svg'
 
-        elif 'Drizzle' in lst:
-            if 'Rain' in lst:
-                result = 'drizzle-rain.svg'
-            elif 'Snow' in lst:
-                result = 'drizzle-snow.svg'
-            elif 'Atmosphere' in lst:
-                result = 'drizzle-fog.svg'
-            elif 'Clear' in lst:
-                result = 'drizzle-clear.svg'
-            elif 'Clouds' in lst:
-                result = 'drizzle-clouds.svg'
-            elif 'Extreme' in lst:
-                result = 'drizzle-extreme.svg'
-            else:
-                result = 'Additional.svg'
-
+    if 'Thunderstorm' in lst:
+        if 'Drizzle' in lst:
+            result = 'thunder-drizzle.svg'
         elif 'Rain' in lst:
-            if 'Snow' in lst:
-                result = 'rain-snow.svg'
-            elif 'Atmosphere' in lst:
-                result = 'rain-fog.svg'
-            elif 'Clear' in lst:
-                result = 'rain-clear.svg'
-            elif 'Clouds' in lst:
-                result = 'rain-clouds.svg'
-            elif 'Extreme' in lst:
-                result = 'rain-extreme.svg'
-            else:
-                result = 'Additional.svg'
-
+            result = 'thunder-rain.svg'
         elif 'Snow' in lst:
-            if 'Atmosphere' in lst:
-                result = 'snow-fog.svg'
-            elif 'Clear' in lst:
-                result = 'snow-clear.svg'
-            elif 'Clouds' in lst:
-                result = 'snow-clouds.svg'
-            elif 'Extreme' in lst:
-                result = 'snow-extreme.svg'
-            else:
-                result = 'Additional.svg'
-
+            result = 'thunder-snow.svg'
         elif 'Atmosphere' in lst:
-            if 'Clear' in lst:
-                result = 'atmosphere-clear.svg'
-            elif 'Clouds' in lst:
-                result = 'atmosphere-clouds.svg'
-            elif 'Extreme' in lst:
-                result = 'atmosphere-extreme.svg'
-            else:
-                result = 'Additional.svg'
-
+            result = 'thunder-fog.svg'
         elif 'Clear' in lst:
-            if 'Clouds' in lst:
-                result = 'clear-clouds.svg'
-            elif 'Extreme' in lst:
-                result = 'clear-extreme.svg'
-            else:
-                result = 'Additional.svg'
-
+            result = 'thunder-clear.svg'
         elif 'Clouds' in lst:
-            if 'Extreme' in lst:
-                result = 'clouds-extreme.svg'
-            else:
-                result = 'Additional.svg'
-
+            result = 'thunder-clouds.svg'
+        elif 'Extreme' in lst:
+            result = 'thunder-extreme.svg'
         else:
             result = 'Additional.svg'
+
+    elif 'Drizzle' in lst:
+        if 'Rain' in lst:
+            result = 'drizzle-rain.svg'
+        elif 'Snow' in lst:
+            result = 'drizzle-snow.svg'
+        elif 'Atmosphere' in lst:
+            result = 'drizzle-fog.svg'
+        elif 'Clear' in lst:
+            result = 'drizzle-clear.svg'
+        elif 'Clouds' in lst:
+            result = 'drizzle-clouds.svg'
+        elif 'Extreme' in lst:
+            result = 'drizzle-extreme.svg'
+        else:
+            result = 'Additional.svg'
+
+    elif 'Rain' in lst:
+        if 'Snow' in lst:
+            result = 'rain-snow.svg'
+        elif 'Atmosphere' in lst:
+            result = 'rain-fog.svg'
+        elif 'Clear' in lst:
+            result = 'rain-clear.svg'
+        elif 'Clouds' in lst:
+            result = 'rain-clouds.svg'
+        elif 'Extreme' in lst:
+            result = 'rain-extreme.svg'
+        else:
+            result = 'Additional.svg'
+
+    elif 'Snow' in lst:
+        if 'Atmosphere' in lst:
+            result = 'snow-fog.svg'
+        elif 'Clear' in lst:
+            result = 'snow-clear.svg'
+        elif 'Clouds' in lst:
+            result = 'snow-clouds.svg'
+        elif 'Extreme' in lst:
+            result = 'snow-extreme.svg'
+        else:
+            result = 'Additional.svg'
+
+    elif 'Atmosphere' in lst:
+        if 'Clear' in lst:
+            result = 'atmosphere-clear.svg'
+        elif 'Clouds' in lst:
+            result = 'atmosphere-clouds.svg'
+        elif 'Extreme' in lst:
+            result = 'atmosphere-extreme.svg'
+        else:
+            result = 'Additional.svg'
+
+    elif 'Clear' in lst:
+        if 'Clouds' in lst:
+            result = 'clear-clouds.svg'
+        elif 'Extreme' in lst:
+            result = 'clear-extreme.svg'
+        else:
+            result = 'Additional.svg'
+
+    elif 'Clouds' in lst:
+        if 'Extreme' in lst:
+            result = 'clouds-extreme.svg'
+        else:
+            result = 'Additional.svg'
+
+    else:
+        result = 'Additional.svg'
     return result
 
 
