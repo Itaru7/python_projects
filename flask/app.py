@@ -24,10 +24,10 @@ def index():
     lat, lon = get_current_loc()
     current = ('http://api.openweathermap.org/data/2.5/weather?units=metric&lon={lon}&lat={'
                'lat}&type=like&APPID=0f4fea93d5538d4ea1b562819aff6ac9'.format(lon=lon, lat=lat))
-    forecast = ('http://api.openweathermap.org/data/2.5/forecast?units=metric&lon={lon}&lat={'
+    forecast = ('http://api.openweathermap.org/data/2.5/forecast?units=metric&lon={lon}&lat={' 
                 'lat}&type=like&APPID=0f4fea93d5538d4ea1b562819aff6ac9'.format(lon=lon, lat=lat))
-    current = urllib.urlopen(current).read()
-    forecast = urllib.urlopen(forecast).read()
+    current = urllib.request.urlopen(current).read()
+    forecast = urllib.request.urlopen(forecast).read()
     result = data_from_json(current, forecast)
     j_current = json.loads(current)
     background = choose_background(j_current['weather'][0]['id'])

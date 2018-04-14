@@ -1,6 +1,7 @@
 from collections import Counter
 from typing import List
 
+
 def choose_the_icon(lst: List) -> str:
     result = ''
     if len(lst) == 1:
@@ -97,20 +98,20 @@ def choose_the_icon(lst: List) -> str:
 
 def choose_background(condition):
     result = ''
-    num = condition / 100
-    if condition is (800 or 801):
+    num = int(condition / 100)
+    if condition == (800 | 801):
         result = 'Clear'
-    elif num is 2:
+    elif num == 2:
         result = 'Thunderstorm'
-    elif num is 3:
+    elif num == 3:
         result = 'Drizzle'
-    elif num is 5:
+    elif num == 5:
         result = 'Rain'
-    elif num is 6:
+    elif num == 6:
         result = 'Snow'
-    elif num is 7:
+    elif num == 7:
         result = 'Atmosphere'
-    elif num is 8:
+    elif num == 8:
         result = 'Clouds'
     elif condition < 907:
         result = 'Extreme'
