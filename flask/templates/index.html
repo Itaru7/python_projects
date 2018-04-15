@@ -18,14 +18,12 @@
 		<script src="js/ie-support/respond.js"></script>
 		<![endif]-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <style type="text/css">
+            #get_current {
+            }
+        </style>
 
-        <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-        <script src="{{ url_for('static', filename='search_box.js') }}"></script>
-
-	</head>
+    </head>
 
 
 	<body>
@@ -62,42 +60,17 @@
 						<input type="text" placeholder="Find your location..." name="location">
 						<input type="submit" value="Find">
 					</form>
-                    <!--
-                    <form action="/info" name="location" class="find-location" method="POST" autocomplete="off">
-                        <div class="autocomplete" class="ui fluid search selection dropdown">
-                             <input id="myInput" type="text" name="location" placeholder="Find your location...">
-                        </div>
-                        <input type="submit" value="Find">
-                    </form>
-                    -->
-                    <!--
-					<form action="/info" name="location" class="find-location" method="POST">
-
-                        <div class="ui fluid search selection dropdown">
-						    <input type="text" name="location" placeholder="Find your location...">
-
-                            <div class="default text">Select City Name</div>
-                            <div class="menu">
-                                <div class="item">Irvine-CA</div>
-                                <div class="item">Irvine-NY</div>
-                                <div class="item">Cost Mesa</div>
-                            </div>
-                        </div>
-
-						<input type="submit" value="Find">
-					</form>
-					-->
                     <a href="{{ url_for('index') }}" class="center">Current Location</a>
 
 				</div>
 			</div>
-			<div class="forecast-table">
+			<div class="forecast-table" id="get_current">
 				<div class="container">
 					<div class="forecast-container">
 						<div class="today forecast">
 							<div class="forecast-header">
 								<!--<div class="day">Monday</div>-->
-								<div class="date">{{ forecast.date['0'] }}</div>
+								<div class="date">{{ forecast.date['0'] - 1 }}</div>
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
                                     <div class="location">{{ current.name }}, {{ current.sys.country }}</div>
@@ -110,6 +83,19 @@
 								<!--<span><img src="images/icon-umberella.png" alt="">20%</span>-->
 								<!--<span><img src="images/icon-wind.png" alt="">{{ current.wind.speed }}km/h</span>-->
 								<!--<span><img src="images/icon-compass.png" alt="">East</span>-->
+							</div>
+						</div>
+                        <div class="forecast">
+							<div class="forecast-header">
+								<div class="day">{{ forecast.date['0'] }}</div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<div class="forecast-icon">
+									<img src={{ url_for('static', filename='icons/'+forecast.weather['0']) }} alt="" width=48>
+								</div>
+								<div class="degree">{{ forecast.temp['0'] }}<sup>o</sup>C</div>
+								<div><small>{{ forecast.temp_max['0'] }}<sup>o</sup></small></div>
+                                <small>{{ forecast.temp_min['0'] }}<sup>o</sup></small>
 							</div>
 						</div>
 						<div class="forecast">
@@ -246,16 +232,22 @@
         }
     });
         </script>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script>
-            autocomplete(document.getElementById("myInput"), countries);
-        </script>
+    <script>
+        var x =document.getElementById('get_current');
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
-        <script type="text/javascript">
-            $('.ui.fluid.dropdown').dropdown({
-                fullTextSearch: true
-            });
-        </script>
+        function get_location(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showLocation)
+            }
+            else{
+                console.log("Browser not supporting")
+            }
+        }
+
+        function showLocation(pos){
+            console.log(pos.coords.latitude);
+            console.log(pos.coords.longitude);
+        }
+    </script>
 	</body>
 </html>

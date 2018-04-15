@@ -1,9 +1,11 @@
 import pandas as pd
 import json
 import requests
+from flask import request
 from pandas.io.json import json_normalize
-import urllib.request
+from urllib.request import urlopen
 from choose_images import choose_icon
+
 
 
 def data_from_json(current, forecast):
@@ -20,8 +22,8 @@ def data_from_json(current, forecast):
 def access_api(location):
     current = ('http://api.openweathermap.org/data/2.5/weather?units=metric&q=%s&APPID=0f4fea93d5538d4ea1b562819aff6ac9' % location)
     forecast = ('http://api.openweathermap.org/data/2.5/forecast?units=metric&q=%s&APPID=0f4fea93d5538d4ea1b562819aff6ac9' % location)
-    current = urllib.request.urlopen(current).read()
-    forecast = urllib.request.urlopen(forecast).read()
+    current = urlopen(current).read()
+    forecast = urlopen(forecast).read()
     j_current = json.loads(current)
     if j_current['cod'] == u'404':
         return 500, 500
@@ -32,8 +34,15 @@ def access_api(location):
 
 
 def get_current_loc():
-    send_url = 'http://freegeoip.net/json'
-    r = requests.get(send_url)
+    if not request.headers.getlist("X-Forwarded-For"):
+        ip = request.remote_addr
+    else:
+        ip = request.headers.getlist("X-Forwarded-For")[0]
+
+    # If want to test locally, access to https://ipdata.co/index.html, and get IP address
+    # Then replace IP address with ip
+    url = 'http://freegeoip.net/json/%s' % ip
+    r = requests.get(url)
     j = json.loads(r.text)
     lat = j['latitude']
     lon = j['longitude']

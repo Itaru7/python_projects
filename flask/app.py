@@ -4,7 +4,7 @@
     Class CS 122 Advanced Python Sec 02
 """
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, redirect
 from choose_images import *
 from cleaning_data import *
 import smtplib
@@ -22,12 +22,12 @@ def main():
 @app.route('/index')
 def index():
     lat, lon = get_current_loc()
-    current = ('http://api.openweathermap.org/data/2.5/weather?units=metric&lon={lon}&lat={'
-               'lat}&type=like&APPID=0f4fea93d5538d4ea1b562819aff6ac9'.format(lon=lon, lat=lat))
-    forecast = ('http://api.openweathermap.org/data/2.5/forecast?units=metric&lon={lon}&lat={' 
-                'lat}&type=like&APPID=0f4fea93d5538d4ea1b562819aff6ac9'.format(lon=lon, lat=lat))
-    current = urllib.request.urlopen(current).read()
-    forecast = urllib.request.urlopen(forecast).read()
+    current = 'http://api.openweathermap.org/data/2.5/weather?units=metric&lon={lon}' \
+              '&lat={lat}&type=like&APPID=0f4fea93d5538d4ea1b562819aff6ac9'.format(lon=lon, lat=lat)
+    forecast = 'http://api.openweathermap.org/data/2.5/forecast?units=metric&lon={lon}' \
+               '&lat={lat}&type=like&APPID=0f4fea93d5538d4ea1b562819aff6ac9'.format(lon=lon, lat=lat)
+    current = urlopen(current).read()
+    forecast = urlopen(forecast).read()
     result = data_from_json(current, forecast)
     j_current = json.loads(current)
     background = choose_background(j_current['weather'][0]['id'])
