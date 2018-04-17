@@ -1,12 +1,18 @@
 """
-    Choose right icons for each day and backgr
-    ound picture for current weather.
+    Choose right icons for each day and
+    background picture for current weather.
 """
 from collections import Counter
 from typing import List
 
 
 def choose_the_icon(lst: List) -> str:
+    """
+    Choose relevant weather icon
+
+    :param lst:
+    :return: str
+    """
     result = ''
     if len(lst) == 1:
         return lst[0] + '.svg'
@@ -100,7 +106,13 @@ def choose_the_icon(lst: List) -> str:
     return result
 
 
-def choose_background(condition):
+def choose_background(condition: int) -> str:
+    """
+    Check the number to determine which background to return
+
+    :param condition:
+    :return: str
+    """
     result = ''
     num = int(condition / 100)
     if condition == (800 | 801):
@@ -124,7 +136,14 @@ def choose_background(condition):
     return result
 
 
-def choose_icon(df):
+def choose_icon(df: 'dataFrame') -> 'dataFrame':
+    """
+    Check the number of occurrence of weather type in df.
+    If occurs more than 2 times, keep it.
+
+    :param df:
+    :return:
+    """
     i = 0
     while i < len(df):
         value = df['weather'][i]
