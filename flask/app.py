@@ -28,7 +28,7 @@ def index():
                '&lat={lat}&type=like&APPID=0f4fea93d5538d4ea1b562819aff6ac9'.format(lon=lon, lat=lat)
     current = urlopen(current).read()
     forecast = urlopen(forecast).read()
-    result = data_from_json(current, forecast)
+    result = data_from_json(forecast)
     j_current = json.loads(current)
     background = choose_background(j_current['weather'][0]['id'])
     j_forecast = result.to_json()

@@ -1,3 +1,7 @@
+"""
+    Choose right icons for each day and backgr
+    ound picture for current weather.
+"""
 from collections import Counter
 from typing import List
 
