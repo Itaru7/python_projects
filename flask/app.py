@@ -21,6 +21,12 @@ def main():
 
 @app.route('/index')
 def index():
+    """
+        Get user's current location by default.
+        And display weather forecast.
+
+    :return:
+    """
     lat, lon = get_current_loc()
     current = 'http://api.openweathermap.org/data/2.5/weather?units=metric&lon={lon}' \
               '&lat={lat}&type=like&APPID=0f4fea93d5538d4ea1b562819aff6ac9'.format(lon=lon, lat=lat)
@@ -38,6 +44,12 @@ def index():
 
 @app.route('/info', methods=['POST', 'GET'])
 def info():
+    """
+        Get location that the user input.
+        Then pass the data to frontend.
+
+    :return:
+    """
     if request.method == 'POST':
         location = request.form['location']
         current, forecast = access_api(location)
@@ -55,6 +67,11 @@ def contact():
 
 @app.route('/send', methods=['POST'])
 def send():
+    """
+        Get in put from user and send email to my address.
+        Then route send.html
+    :return:
+    """
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
@@ -80,11 +97,23 @@ def send():
 
 @app.errorhandler(404)
 def page_not_found(e):
+    """
+    Return 404 error
+
+    :param e:
+    :return:
+    """
     return render_template('404.html'), 404
 
 
 @app.errorhandler(500)
 def internal_server_error(error):
+    """
+    Return 500 error
+
+    :param error:
+    :return:
+    """
     app.logger.error('Server Error: %s', error)
     return render_template('500.html'), 500
 
