@@ -115,7 +115,7 @@ def choose_background(condition: int) -> str:
     """
     result = ''
     num = int(condition / 100)
-    if condition == (800 | 801):
+    if condition == 800 or condition == 801:
         result = 'Clear'
     elif num == 2:
         result = 'Thunderstorm'

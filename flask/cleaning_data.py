@@ -70,6 +70,8 @@ def get_current_loc() -> [str, str]:
 
     # If want to test locally, access to https://ipdata.co/index.html, and get IP address
     # Then replace IP address with ip
+    # '76.21.124.7': Alum Rock (Home)
+    # '130.65.254.13': San Jose
     url = 'http://freegeoip.net/json/%s' % '130.65.254.13'
     r = requests.get(url)
     j = json.loads(r.text)
