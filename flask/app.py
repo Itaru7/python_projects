@@ -27,7 +27,7 @@ def index():
 
     :return:
     """
-    lat, lon = get_current_loc()
+    lat, lon, ip = get_current_loc()
     current = 'http://api.openweathermap.org/data/2.5/weather?units=metric&lon={lon}' \
               '&lat={lat}&type=like&APPID=0f4fea93d5538d4ea1b562819aff6ac9'.format(lon=lon, lat=lat)
     forecast = 'http://api.openweathermap.org/data/2.5/forecast?units=metric&lon={lon}' \
@@ -39,7 +39,7 @@ def index():
     background = choose_background(j_current['weather'][0]['id'])
     j_forecast = result.to_json()
     result_forecast = json.loads(j_forecast)
-    return render_template('index.html', current=j_current, forecast=result_forecast, background=background)
+    return render_template('index.html', current=j_current, forecast=result_forecast, background=background, ip=ip)
 
 
 @app.route('/info', methods=['POST', 'GET'])
