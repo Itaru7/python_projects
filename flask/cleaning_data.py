@@ -72,11 +72,11 @@ def get_current_loc() -> [str, str]:
     # Then replace IP address with ip
     # '76.21.124.7': Alum Rock (Home)
     # '130.65.254.13': San Jose
-    print('ip address is:', ip)
-    url = 'http://api.ipstack.com/%s?access_key=5061f824f9190fbf7fa3e5dffac81f5e' % '130.65.254.13'
+    # print('ip address is:', ip)
+    url = 'http://api.ipstack.com/%s?access_key=5061f824f9190fbf7fa3e5dffac81f5e' % ip
     r = requests.get(url)
     j = json.loads(r.text)
     print(j)
     lat = j['latitude']
     lon = j['longitude']
-    return lat, lon, ip
+    return lat, lon
